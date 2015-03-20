@@ -1,3 +1,4 @@
-template:
+# -*- mode:yaml -*-
+
+adagios:
   lookup:
-    master: template-master

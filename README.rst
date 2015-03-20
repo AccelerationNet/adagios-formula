@@ -1,14 +1,15 @@
-================
-template-formula
+adagios-formula
 ================
 
-A saltstack formula that is empty. It has dummy content to help with a quick
-start on a new formula.
+Formula to install and configure Adagios_ on a debian-based system. Mostly tested to work against my `shinken-formula`_
 
 .. note::
 
     See the full `Salt Formulas installation and usage instructions
     <http://docs.saltstack.com/en/latest/topics/development/conventions/formulas.html>`_.
+
+.. _Adagios: https://github.com/opinkerfi/adagios
+.. _shinken-formula: https://github.com/AccelerationNet/shinken-formula
 
 Available states
 ================
@@ -16,7 +17,7 @@ Available states
 .. contents::
     :local:
 
-``template``
+``adagios``
 ------------
 
-Installs the template package, and starts the associated template service.
+Installs adagios from pip, configures according to pillar settings.
