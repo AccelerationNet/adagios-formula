@@ -1,6 +1,10 @@
 {% set adagios = salt['grains.filter_by']({
-    'default': {
+    'Debian': {
+      'packages': ['python-pip', 'python-dev']
     },
 }, merge=salt['pillar.get']('adagios:lookup')) %}
 
-{% set config = salt['pillar.get']('adagios:config', {}) %}
+{% set config = salt['pillar.get']('adagios:config', {
+   'nagios_config': '/etc/nagios/nagios.cfg',
+   'destination_directory': '/etc/nagios/adagios'
+  }, True) %}

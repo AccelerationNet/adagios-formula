@@ -2,7 +2,7 @@
 
 deps:
   pkg.installed:
-    - names: ['python-pip', 'python-dev']
+    - names: {{adagios.packages}}
   pip.installed:
     - names:
         - pynag
@@ -28,3 +28,12 @@ deps:
     - require:
         - pip: deps
 {% endfor %}
+
+destination directory:
+  file.directory:
+    - name: {{config['destination_directory'] }}
+
+destination directory included:
+  file.append:
+    - name: {{config['nagios_config'] }}
+    - text: cfg_dir={{config['destination_directory'] }}

@@ -7,8 +7,7 @@ adagios:
     livestatus_path: /var/lib/shinken/live
     nagios_init_script: sudo /etc/init.d/shinken-arbiter
     nagios_binary: /usr/bin/shinken
-    destination_directory: /opt/shinken-config/
-    enable_githandler: False
+    destination_directory: /etc/shinken/adagios
     enable_pnp4nagios: False
     enable_graphite: True
     graphite_url: http://graphite.lxc
