@@ -2,3 +2,5 @@
     'default': {
     },
 }, merge=salt['pillar.get']('adagios:lookup')) %}
+
+{% set config = salt['pillar.get']('adagios:config', {}) %}
