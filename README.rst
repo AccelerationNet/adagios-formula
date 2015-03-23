@@ -24,3 +24,6 @@ Installs adagios from pip, configures according to pillar settings.
 
 Modifies your nagios config to reference the spot where adagios will
 write files.
+
+Adagios is running via upstart and gunicorn_django listening on
+0.0.0.0:8000

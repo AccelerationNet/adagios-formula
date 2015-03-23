@@ -1,7 +1,15 @@
 # -*- mode:yaml -*-
 
 adagios:
-  # replaces values in adagios.conf
+
+  # settings for the running the django app
+  web:
+    user: nagios
+    group: nagios
+    bind: 0.0.0.0:8000
+    logdir: /var/log/adagios-web
+
+  # replaces values in adagios.conf, arbitrary key/values
   config:
     nagios_config: /etc/shinken/shinken.cfg
     livestatus_path: /var/lib/shinken/live
@@ -12,3 +20,4 @@ adagios:
     enable_graphite: True
     graphite_url: http://graphite.lxc
   lookup:
+    packages: ['python-pip', 'python-dev']

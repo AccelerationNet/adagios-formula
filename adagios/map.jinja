@@ -8,3 +8,10 @@
    'nagios_config': '/etc/nagios/nagios.cfg',
    'destination_directory': '/etc/nagios/adagios'
   }, True) %}
+
+{% set web = salt['pillar.get']('adagios:web', {
+   'user': 'nagios',
+   'group': 'nagios',
+   'bind': '0.0.0.0:8000',
+   'logdir': '/var/log/adagios-web'
+  }, True) %}
