@@ -27,3 +27,9 @@ write files.
 
 Adagios is running via upstart and gunicorn_django listening on
 0.0.0.0:8000
+
+``adagios.shinken``
+-------------------
+
+Installs some extra code to support running adagios against shinken -
+lots of assumptions in here

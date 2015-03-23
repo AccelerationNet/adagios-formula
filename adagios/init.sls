@@ -46,6 +46,12 @@ adagio-web logs:
     - group: {{web.group}}
     - mode: 775
 
+adagio-web userdata:
+  file.directory:
+    - name: /var/lib/adagios/
+    - group: {{web.group}}
+    - mode: 775
+
 adagios-web:
   file.managed:
     - name: /etc/init/adagios.conf
@@ -64,4 +70,20 @@ adagios-web:
     - enable: True
     - watch:
         - file: adagios-web
-        - file: /etc/adagios/adagios.conf*
+        - file: /etc/adagios/*
+
+
+{% set pynag_overrides = salt['pillar.get']('adagios:pynag_overrides')%}
+
+{% if pynag_overrides %}
+
+/etc/adagios/conf.d/pynag_overrides.conf:
+  file.managed:
+    - source: salt://adagios/files/etc/adagios/conf.d/pynag_overrides.jinja.conf
+    - template: jinja
+    - makedirs: True
+    - mode: 444
+    - require:
+        - pip: deps
+
+{% endif %}

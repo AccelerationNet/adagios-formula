@@ -1,6 +1,12 @@
 # -*- mode:yaml -*-
 
 adagios:
+  # overrides settings pynag expects to read out of the cfg file
+  pynag_overrides:
+    object_cache_file: /var/run/shinken/arbiterd.pid
+    log_file: /var/log/shinken/shinken.log
+    log_archive_path: /var/log/shinken/archives/
+    path_to_command_file: /var/lib/shinken/nagios.cmd
 
   # settings for the running the django app
   web:
@@ -12,9 +18,6 @@ adagios:
   # replaces values in adagios.conf, arbitrary key/values
   config:
     nagios_config: /etc/shinken/shinken.cfg
-    livestatus_path: /var/lib/shinken/live
-    nagios_init_script: sudo /etc/init.d/shinken-arbiter
-    nagios_binary: /usr/bin/shinken
     destination_directory: /etc/shinken/adagios
     enable_pnp4nagios: False
     enable_graphite: True
