@@ -3,15 +3,23 @@
 deps:
   pkg.installed:
     - names: {{adagios.packages}}
+  # want some bug fixes in adagios, which needs a newer pynag
   pip.installed:
     - names:
-        - pynag
+        - "git+https://github.com/pynag/pynag.git#egg=pynag"
         - django==1.6
         - simplejson
-        - adagios
+        - "git+https://github.com/opinkerfi/adagios.git#egg=adagios"
         - gunicorn
     - requre:
         - pkg: deps
+  # pip-installing from git doesn't copy these files
+  module.wait:
+    - name: rsync.rsync
+    - src: /usr/local/lib/python2.7/dist-packages/adagios/etc/
+    - dst: /etc/
+    - watch:
+        - pip: deps
 
 /etc/adagios/adagios.conf warn:
   file.prepend:
