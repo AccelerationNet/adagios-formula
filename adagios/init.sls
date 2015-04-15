@@ -6,10 +6,10 @@ deps:
   # want some bug fixes in adagios, which needs a newer pynag
   pip.installed:
     - names:
-        - "git+https://github.com/pynag/pynag.git#egg=pynag"
+        - "git+https://github.com/AccelerationNet/pynag.git@accel#egg=pynag"
         - django==1.6
         - simplejson
-        - "git+https://github.com/opinkerfi/adagios.git#egg=adagios"
+        - "git+https://github.com/AccelerationNet/adagios.git@accel#egg=adagios"
         - gunicorn
     - requre:
         - pkg: deps
@@ -46,39 +46,6 @@ destination directory included:
   file.append:
     - name: {{config['nagios_config'] }}
     - text: cfg_dir={{config['destination_directory'] }}
-
-
-adagio-web logs:
-  file.directory:
-    - name: {{web.logdir}}
-    - group: {{web.group}}
-    - mode: 775
-
-adagio-web userdata:
-  file.directory:
-    - name: /var/lib/adagios/
-    - group: {{web.group}}
-    - mode: 775
-
-adagios-web:
-  file.managed:
-    - name: /etc/init/adagios.conf
-    - source: salt://adagios/files/etc/init/adagios.conf.jinja
-    - template: jinja
-    - mode: 444
-    - context:
-{% for k,v in web.items() %}
-        {{k}}: {{v}}
-{% endfor %}
-    - require:
-        - pip: deps
-        - file: adagio-web logs
-  service.running:
-    - name: adagios
-    - enable: True
-    - watch:
-        - file: adagios-web
-        - file: /etc/adagios/*
 
 
 {% set pynag_overrides = salt['pillar.get']('adagios:pynag_overrides')%}

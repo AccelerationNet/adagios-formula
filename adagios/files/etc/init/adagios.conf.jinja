@@ -8,11 +8,11 @@ start on runlevel [2345]
 stop on runlevel [016]
 
 respawn
-setuid {{user}}
-setgid {{group}}
-chdir {{salt['cmd.exec_code']('python', 'import adagios, os.path; print os.path.dirname(adagios.__file__)')}}
 
-# adagios doesn't work under plain gunicorn or uwsgi, can't figure out
-# why. https://github.com/opinkerfi/adagios/issues/538
-exec gunicorn_django --bind={{bind}} --name=adagios --workers=3 \
-     --error-logfile={{logdir}}/adagios.log --access-logfile={{logdir}}/access.log
+pre-start script
+  # make sure the PID folder exists
+  mkdir -p /var/run/adagios
+  chown www-data:{{ group }} /var/run/adagios
+end script
+
+exec uwsgi --ini /etc/adagios/uwsgi.ini
